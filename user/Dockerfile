@@ -4,10 +4,11 @@ RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
 WORKDIR /opt/server
 ENV MONGO=true
 RUN chown roboshop:roboshop /opt/server
+USER roboshop
 COPY package.json /opt/server/
 COPY server.js /opt/server/
 RUN npm install
 RUN echo Hello World
-USER roboshop
+USER root
 RUN adduser cart
 CMD ["node", "server.js"]
